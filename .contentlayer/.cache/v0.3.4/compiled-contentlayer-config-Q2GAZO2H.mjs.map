@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../contentlayer.config.ts"],
+  "sourcesContent": ["import { defineDocumentType, makeSource } from \"contentlayer/source-files\";\n\nexport const Snippet = defineDocumentType(() => ({\n  name: \"Snippet\",\n  filePathPattern: `snippets/**/*.mdx`,\n  contentType: \"mdx\",\n  fields: {\n    file: {\n      type: \"string\",\n      description: \"The name of the snippet\",\n      required: true,\n    },\n    order: {\n      type: \"number\",\n      description: \"The order of the snippet\",\n      required: true,\n    },\n  },\n  computedFields: {\n    slug: {\n      type: \"string\",\n      resolve: (_) => _._raw.sourceFileName.replace(/\\.[^.$]+$/, \"\"),\n    },\n  },\n}));\n\nexport default makeSource({\n  contentDirPath: \"content\",\n  documentTypes: [Snippet],\n});\n"],
+  "mappings": ";AAAA,SAAS,oBAAoB,kBAAkB;AAExC,IAAM,UAAU,mBAAmB,OAAO;AAAA,EAC/C,MAAM;AAAA,EACN,iBAAiB;AAAA,EACjB,aAAa;AAAA,EACb,QAAQ;AAAA,IACN,MAAM;AAAA,MACJ,MAAM;AAAA,MACN,aAAa;AAAA,MACb,UAAU;AAAA,IACZ;AAAA,IACA,OAAO;AAAA,MACL,MAAM;AAAA,MACN,aAAa;AAAA,MACb,UAAU;AAAA,IACZ;AAAA,EACF;AAAA,EACA,gBAAgB;AAAA,IACd,MAAM;AAAA,MACJ,MAAM;AAAA,MACN,SAAS,CAAC,MAAM,EAAE,KAAK,eAAe,QAAQ,aAAa,EAAE;AAAA,IAC/D;AAAA,EACF;AACF,EAAE;AAEF,IAAO,8BAAQ,WAAW;AAAA,EACxB,gBAAgB;AAAA,EAChB,eAAe,CAAC,OAAO;AACzB,CAAC;",
+  "names": []
+}

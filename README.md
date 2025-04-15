@@ -1,36 +1,108 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Google Font Picker Component for shadcn/ui
 
-## Getting Started
+A beautiful and functional Google Font picker component built with shadcn/ui. This component allows users to search, filter, and preview Google Fonts directly in their application.
 
-First, run the development server:
+## Features
+
+- 🔍 Search fonts by name
+- 🗂️ Filter fonts by category (serif, sans-serif, display, handwriting, monospace)
+- ⚖️ Select font weights
+- 👀 Live font preview
+- 📱 Responsive design
+- ♿ Accessible UI components
+- 🎨 Customizable styling
+
+## Prerequisites
+
+Before using this component, make sure you have:
+
+1. A Next.js project with shadcn/ui set up
+2. A Google Fonts API key (get one from [Google Cloud Console](https://console.cloud.google.com/))
+
+## Installation
+
+1. Add the required dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install @tanstack/react-query lucide-react
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install the required shadcn/ui components:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npx shadcn-ui@latest add button command popover select skeleton scroll-area
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Set up your environment variables by creating a `.env.local` file:
 
-## Learn More
+```env
+NEXT_PUBLIC_GOOGLE_FONTS_API_KEY=your_google_fonts_api_key_here
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Usage
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Import the FontPicker component:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```tsx
+import { FontPicker } from "@/components/ui/font-picker";
+```
 
-## Deploy on Vercel
+2. Wrap your application with QueryClientProvider:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```tsx
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+const queryClient = new QueryClient();
+
+export default function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      {/* Your app content */}
+    </QueryClientProvider>
+  );
+}
+```
+
+3. Use the FontPicker component:
+
+```tsx
+export default function MyComponent() {
+  const [selectedFont, setSelectedFont] = useState<GoogleFont | null>(null);
+
+  return (
+    <FontPicker
+      value={selectedFont?.family}
+      onFontSelect={setSelectedFont}
+    />
+  );
+}
+```
+
+## Component API
+
+### FontPicker Props
+
+| Prop           | Type                         | Description                                      |
+| -------------- | ---------------------------- | ------------------------------------------------ |
+| `value`        | `string`                     | The currently selected font family               |
+| `onFontSelect` | `(font: GoogleFont) => void` | Callback function called when a font is selected |
+
+### GoogleFont Type
+
+```ts
+interface GoogleFont {
+  family: string;
+  variants: string[];
+  subsets: string[];
+  version: string;
+  lastModified: string;
+  files: Record<string, string>;
+  category: string;
+  kind: string;
+  menu: string;
+}
+```
+
+## License
+
+MIT
