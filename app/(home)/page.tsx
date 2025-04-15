@@ -5,12 +5,15 @@ import Setup from "@/app/(home)/sections/setup";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { siteConfig } from "@/config/site";
 
+
+
 import Variants from "./sections/variants";
+
 
 export default function Home() {
   return (
     <>
-      <div className="container max-w-5xl mx-auto flex justify-between py-40 px-4">
+      <div className="container mx-auto flex max-w-5xl justify-between px-4 pt-20">
         <ThemeToggle />
         <main className="flex min-h-screen w-full flex-col items-center justify-between scroll-smooth">
           <Hero />
@@ -19,8 +22,8 @@ export default function Home() {
         </main>
       </div>
       <footer className="border-t p-4">
-        <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-          <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
+        <div className="flex flex-col items-center justify-between gap-2 md:flex-row">
+          <p className="text-muted-foreground text-center text-sm leading-loose md:text-left">
             Built with ❤️ by{" "}
             <a
               href={siteConfig.links.twitter}
@@ -29,6 +32,18 @@ export default function Home() {
               className="font-medium underline underline-offset-4"
             >
               Vinod Patidar
+            </a>
+            .
+          </p>
+          <p className="text-muted-foreground text-center text-sm leading-loose md:text-left">
+            Open Source Font Picker{" "}
+            <a
+              href={siteConfig.links.github}
+              target="_blank"
+              rel="noreferrer"
+              className="font-medium underline underline-offset-4"
+            >
+              Shadcn Font Picker
             </a>
             .
           </p>

@@ -1,15 +1,16 @@
 ---
 file: font-picker.tsx
+filePath: components/ui/font-picker.tsx
 order: 1
+description: Use the font picker component
 ---
 
 ```tsx
 "use client";
 
 import type { GoogleFont } from "@/lib/fonts";
-import * as React from "react";
-import { useQuery } from "@tanstack/react-query";
 import { Check, ChevronsUpDown, Filter } from "lucide-react";
+import * as React from "react";
 import { FixedSizeList as List } from "react-window";
 
 import { Button } from "@/components/ui/button";
@@ -108,24 +109,38 @@ export function FontPicker({
   const [search, setSearch] = React.useState("");
   const [isOpen, setIsOpen] = React.useState(false);
   const [selectedCategory, setSelectedCategory] = React.useState<string>("all");
+  const [fonts, setFonts] = React.useState<GoogleFont[]>([]);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [error, setError] = React.useState<Error | null>(null);
   const listRef = React.useRef<List>(null);
   const buttonRef = React.useRef<HTMLButtonElement>(null);
 
-  const { data: fonts, isLoading } = useQuery<GoogleFont[]>({
-    queryKey: ["google-fonts"],
-    queryFn: fetchGoogleFonts,
-    staleTime: 24 * 60 * 60 * 1000, // 24 hours
-    gcTime: 24 * 60 * 60 * 1000, // 24 hours
-  });
+  React.useEffect(() => {
+    const loadFonts = async () => {
+      try {
+        setIsLoading(true);
+        const fetchedFonts = await fetchGoogleFonts();
+        setFonts(fetchedFonts);
+        setError(null);
+      } catch (err) {
+        setError(
+          err instanceof Error ? err : new Error("Failed to load fonts"),
+        );
+        console.error("Error loading fonts:", err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadFonts();
+  }, []);
 
   const categories = React.useMemo(() => {
-    if (!fonts) return [];
     const uniqueCategories = new Set(fonts.map((font) => font.category));
     return Array.from(uniqueCategories).sort();
   }, [fonts]);
 
   const filteredFonts = React.useMemo(() => {
-    if (!fonts) return [];
     return fonts.filter((font: GoogleFont) => {
       const matchesSearch = font.family
         .toLowerCase()
@@ -242,6 +257,10 @@ export function FontPicker({
           {isLoading ? (
             <div className="flex items-center justify-center p-4">
               <div className="h-4 w-4 animate-spin rounded-full border-b-2 border-gray-900" />
+            </div>
+          ) : error ? (
+            <div className="flex items-center justify-center p-4 text-sm text-red-500">
+              Failed to load fonts. Please try again later.
             </div>
           ) : (
             <>
