@@ -2,20 +2,16 @@
 
 import Hero from "@/app/(home)/sections/hero";
 import Setup from "@/app/(home)/sections/setup";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { Header } from "@/components/header";
 import { siteConfig } from "@/config/site";
-
-
-
 import Variants from "./sections/variants";
-
 
 export default function Home() {
   return (
-    <>
+    <div className="flex min-h-svh flex-col px-4">
+      <Header />
       <div className="container mx-auto flex max-w-5xl justify-between px-4 pt-20">
-        <ThemeToggle />
-        <main className="flex min-h-screen w-full flex-col items-center justify-between scroll-smooth">
+        <main className="flex w-full flex-col items-center justify-between scroll-smooth">
           <Hero />
           <Setup />
           <Variants />
@@ -49,6 +45,6 @@ export default function Home() {
           </p>
         </div>
       </footer>
-    </>
+    </div>
   );
 }
