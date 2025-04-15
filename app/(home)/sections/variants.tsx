@@ -15,7 +15,7 @@ export default function Variants() {
         </p>
         <div className="w-full">
           <h3 className="font-heading mt-8 scroll-m-20 text-lg font-semibold tracking-tight">
-            Summary
+            Default
           </h3>
           <div className="preview relative mt-2 flex min-h-[200px] w-full flex-col gap-4 items-center justify-center rounded-md border p-10 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
             <FontPicker value={font} onChange={(font) => setFont(font)} />
@@ -35,7 +35,7 @@ export default function Variants() {
             <FontPicker
               value={font}
               onChange={(font) => setFont(font)}
-              width="200px"
+              width={200}
             />
           </div>
         </div>
@@ -47,7 +47,7 @@ export default function Variants() {
             <FontPicker
               value={font}
               onChange={(font) => setFont(font)}
-              height="200px"
+              height={200}
             />
           </div>
         </div>
