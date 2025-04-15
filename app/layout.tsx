@@ -1,9 +1,7 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-
 import { Providers } from "@/components/providers";
 import { Toaster } from "@/components/ui/sonner";
-
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -46,6 +44,9 @@ export const metadata: Metadata = {
     creator: "@thevinodpatidar",
   },
   icons: { icon: "/favicon.ico" },
+  verification: {
+    google: "Hz1IFTnXjR3j5H80jC25eENAjgzEhbatuRNeg46tTow",
+  },
 };
 
 export default function RootLayout({
