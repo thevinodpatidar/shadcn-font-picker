@@ -58,8 +58,8 @@ export default function MyComponent() {
     <FontPicker
       value={selectedFont}
       onChange={setSelectedFont}
-      width="300px"
-      height="400px"
+      width={300}
+      height={400}
       showFilters={true}
       className="my-custom-class"
     />
@@ -75,8 +75,8 @@ export default function MyComponent() {
 | ------------- | ------------------------ | ------- | ------------------------------------------------ |
 | `value`       | `string`                 | -       | The currently selected font family               |
 | `onChange`    | `(font: string) => void` | -       | Callback function called when a font is selected |
-| `width`       | `string \| number`       | "300px" | Width of the picker component                    |
-| `height`      | `string \| number`       | "300px" | Height of the picker component                   |
+| `width`       | `number`                 | 300     | Width of the picker component                    |
+| `height`      | `number`                 | 400     | Height of the picker component                   |
 | `className`   | `string`                 | -       | Additional CSS classes for customization         |
 | `showFilters` | `boolean`                | true    | Whether to show the category filter              |
 
