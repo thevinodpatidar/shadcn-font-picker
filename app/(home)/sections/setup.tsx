@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { allSnippets, Snippet as SnippetType } from "contentlayer/generated";
 
+
+
 import CodeBlock from "@/components/code-block";
 import { Snippet } from "@/components/snippet";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -48,10 +50,8 @@ export default function Setup() {
         <h3 className="font-heading mt-8 scroll-m-20 text-lg font-semibold tracking-tight">
           Install necessary React packages:
         </h3>
-        <CodeBlock
-          value={"npm install react-window"}
-          className="mt-2"
-        />
+        <CodeBlock value={"yarn add react-window"} className="mt-2" />
+        <CodeBlock value={"yarn add -D @types/react-window"} className="mt-2" />
       </div>
       <div className="w-full">
         <h3 className="font-heading mt-8 scroll-m-20 text-lg font-semibold tracking-tight">
@@ -101,7 +101,8 @@ export default function Setup() {
           className="mt-2"
         />
         <p className="text-normal leading-7 [&:not(:first-child)]:mt-6">
-          Copy the code from the snippet below and paste it in your component file.
+          Copy the code from the snippet below and paste it in your component
+          file.
         </p>
         <div className="mt-10 flex flex-col">
           <h3 className="font-heading mt-12 scroll-m-20 border-b pb-2 text-xl font-semibold tracking-tight first:mt-0">
@@ -111,7 +112,12 @@ export default function Setup() {
             {snippets.map((snippet) => (
               <AccordionItem key={snippet.slug} value={snippet.file}>
                 <AccordionTrigger id={snippet.file}>
-                  <code>{snippet.file} <span className="text-muted-foreground text-xs text-right">({snippet.filePath})</span></code>
+                  <code>
+                    {snippet.file}{" "}
+                    <span className="text-muted-foreground text-right text-xs">
+                      ({snippet.filePath})
+                    </span>
+                  </code>
                 </AccordionTrigger>
                 <AccordionContent>
                   <Snippet snippet={snippet} />
