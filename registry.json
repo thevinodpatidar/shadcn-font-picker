@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "shadcn-font-picker",
+  "homepage": "https://shadcn-font-picker.vercel.app",
+  "items": [
+    {
+      "name": "font-picker",
+      "type": "registry:block",
+      "title": "Font Picker",
+      "description": "A font picker component.",
+      "registryDependencies": ["button", "command", "dropdown-menu", "popover"],
+      "dependencies": ["react-window", "@types/react-window"],
+      "files": [
+        {
+          "path": "components/ui/font-picker.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "lib/fonts.ts",
+          "type": "registry:lib"
+        }
+      ]
+    }
+  ]
+}

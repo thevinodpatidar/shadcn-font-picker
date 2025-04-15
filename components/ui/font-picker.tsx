@@ -1,10 +1,5 @@
 "use client";
 
-import type { GoogleFont } from "@/lib/fonts";
-import { Check, ChevronsUpDown, Filter } from "lucide-react";
-import * as React from "react";
-import { FixedSizeList as List } from "react-window";
-
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -25,8 +20,13 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import type { GoogleFont } from "@/lib/fonts";
 import { fetchGoogleFonts, loadFont } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
+import { Check, ChevronsUpDown, Filter } from "lucide-react";
+import * as React from "react";
+import { FixedSizeList as List } from "react-window";
+
 
 function FontListItem({
   font,
@@ -113,6 +113,10 @@ export function FontPicker({
         setIsLoading(true);
         const fetchedFonts = await fetchGoogleFonts();
         setFonts(fetchedFonts);
+        const font = fetchedFonts.find((font) => font.family === value);
+        if (font) {
+          setSelectedFont(font);
+        }
         setError(null);
       } catch (err) {
         setError(
@@ -125,7 +129,7 @@ export function FontPicker({
     };
 
     loadFonts();
-  }, []);
+  }, [value]);
 
   const categories = React.useMemo(() => {
     const uniqueCategories = new Set(fonts.map((font) => font.category));
@@ -188,8 +192,10 @@ export function FontPicker({
           style={{ width }}
         >
           <span className="truncate">
-            {value
-              ? filteredFonts.find((font) => font.family === value)?.family
+            {selectedFont
+              ? filteredFonts.find(
+                  (font) => font.family === selectedFont.family,
+                )?.family
               : "Select font..."}
           </span>
           <ChevronsUpDown className="h-4 w-4 shrink-0 opacity-50" />

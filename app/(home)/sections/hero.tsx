@@ -1,21 +1,14 @@
-import Link from "next/link";
+import CodeBlock from "@/components/code-block";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { FontPicker } from "@/components/ui/font-picker";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { siteConfig } from "@/config/site";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-import { Button, buttonVariants } from "@/components/ui/button";
-import { FontPicker } from "@/components/ui/font-picker";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { siteConfig } from "@/config/site";
 
 const FormSchema = z.object({
   font: z.string().min(1, {
@@ -74,6 +67,10 @@ export default function Hero() {
               Github
             </Link>
           </div>
+          <CodeBlock
+            value="npx shadcn@latest add https://shadcn-font-picker.vercel.app/r/font-picker.json"
+            className="mt-2 w-fit px-12 text-balance"
+          />
         </div>
 
         <div id="try" className="w-full py-8">

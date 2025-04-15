@@ -42,7 +42,7 @@ export default function Setup() {
         <div data-rehype-pretty-code-fragment="">
           <CodeBlock
             className="mt-2"
-            value={`npx shadcn@latest add button command dropdown-menu hover-card popover`}
+            value={`npx shadcn@latest add button command dropdown-menu popover`}
           />
         </div>
       </div>
