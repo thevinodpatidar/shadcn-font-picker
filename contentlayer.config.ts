@@ -1,9 +1,5 @@
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
 
-
-
-
-
 export const Snippet = defineDocumentType(() => ({
   name: "Snippet",
   filePathPattern: `snippets/**/*.mdx`,

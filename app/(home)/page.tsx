@@ -36,14 +36,14 @@ export default function Home() {
             .
           </p>
           <p className="text-muted-foreground text-center text-sm leading-loose md:text-left">
-            Open Source Font Picker{" "}
+            The source code is available on{" "}
             <a
               href={siteConfig.links.github}
               target="_blank"
               rel="noreferrer"
               className="font-medium underline underline-offset-4"
             >
-              Shadcn Font Picker
+              Github.
             </a>
             .
           </p>
