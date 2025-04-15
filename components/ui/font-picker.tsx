@@ -25,8 +25,10 @@ import { fetchGoogleFonts, loadFont } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import { Check, ChevronsUpDown, Filter } from "lucide-react";
 import * as React from "react";
-import { FixedSizeList as List } from "react-window";
+import { ComponentType } from "react";
+import { FixedSizeList as _FixedSizeList, FixedSizeListProps } from "react-window";
 
+const FixedSizeList = _FixedSizeList as ComponentType<FixedSizeListProps>;
 
 function FontListItem({
   font,
@@ -81,8 +83,8 @@ function FontListItem({
 interface FontPickerProps {
   onChange?: (font: GoogleFont["family"]) => void;
   value?: string;
-  width?: string | number;
-  height?: string | number;
+  width?: number;
+  height?: number;
   className?: string;
   showFilters?: boolean;
 }
@@ -90,8 +92,8 @@ interface FontPickerProps {
 export function FontPicker({
   onChange,
   value,
-  width = "300px",
-  height = "300px",
+  width = 300,
+  height = 300,
   className,
   showFilters = true,
 }: FontPickerProps) {
@@ -104,7 +106,6 @@ export function FontPicker({
   const [fonts, setFonts] = React.useState<GoogleFont[]>([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [error, setError] = React.useState<Error | null>(null);
-  const listRef = React.useRef<List>(null);
   const buttonRef = React.useRef<HTMLButtonElement>(null);
 
   React.useEffect(() => {
@@ -201,7 +202,7 @@ export function FontPicker({
           <ChevronsUpDown className="h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="p-0" style={{ width }} align="start">
+      <PopoverContent className="p-0" style={{ width, height }} align="start">
         <Command>
           <CommandInput
             placeholder="Search fonts..."
@@ -265,15 +266,14 @@ export function FontPicker({
               <CommandEmpty>No fonts found.</CommandEmpty>
               <CommandGroup>
                 <div className={`h-[${height}px]`}>
-                  <List
-                    ref={listRef}
-                    height={400}
+                  <FixedSizeList
+                    height={height}
                     itemCount={filteredFonts.length}
                     itemSize={55}
                     width="100%"
                   >
                     {Row}
-                  </List>
+                  </FixedSizeList>
                 </div>
               </CommandGroup>
             </>
