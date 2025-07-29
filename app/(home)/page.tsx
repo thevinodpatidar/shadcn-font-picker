@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div className="flex min-h-svh flex-col px-4">
       <Header />
-      <div className="container mx-auto flex max-w-5xl justify-between px-4 pt-20">
+      <div className="container mx-auto flex max-w-5xl justify-between pt-8">
         <main className="flex w-full flex-col items-center justify-between scroll-smooth">
           <Hero />
           <Setup />
